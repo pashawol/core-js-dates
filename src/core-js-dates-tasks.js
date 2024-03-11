@@ -151,11 +151,11 @@ function isDateInPeriod(date, period) {
  */
 function formatDate(date) {
   const d = new Date(date);
-  const h = d.getUTCHours() > 12 ? d.getUTCHours() - 12 : d.getUTCHours();
-  const m = d.getUTCHours() >= 12 ? 'PM' : 'AM';
+  const h = d.getHours() > 12 ? d.getHours() - 12 : d.getHours();
+  const m = d.getHours() >= 12 ? 'PM' : 'AM';
   const min = d.getMinutes() > 10 ? d.getMinutes() : `0${d.getMinutes()}`;
   const s = d.getSeconds() > 10 ? d.getSeconds() : `0${d.getSeconds()}`;
-  return `${d.getMonth() + 1}/${d.getUTCDate()}/${d.getFullYear()}, ${h}:${min}:${s} ${m}`;
+  return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}, ${h}:${min}:${s} ${m}`;
 }
 
 /**
