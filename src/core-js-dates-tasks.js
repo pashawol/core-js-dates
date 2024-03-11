@@ -20,7 +20,6 @@
 function dateToTimestamp(date) {
   return Date.parse(date);
 }
-// console.log(dateToTimestamp('04 Dec 1995 00:12:00 UTC'));
 
 /**
  * Returns the time in hh:mm:ss format from the received date.
@@ -40,8 +39,6 @@ function getTime(date) {
   return `${hour < 10 ? `0${hour}` : hour}:${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`;
 }
 
-// console.log(getTime(2023, 5, 1, 8, 20, 55));
-// console.log(getTime(2015, 10, 20, 23, 15, 1));
 /**
  * Returns the name of the day of the week for a given date string.
  *
@@ -85,9 +82,6 @@ function getNextFriday(date) {
   return new Date(data.setDate(data.getDate() + nextFr));
 }
 
-// console.log('2024-02-09T00:00:00Z', getNextFriday('2024-02-03T00:00:00Z'));
-// console.log('2024-02-16T00:00:00Z', getNextFriday('2024-02-13T00:00:00Z'));
-// console.log('2024-02-23T00:00:00Z', getNextFriday('2024-02-16T00:00:00Z'));
 /**
  * Returns the number of days in a specified month and year.
  *
@@ -104,7 +98,7 @@ function getCountDaysInMonth(month, year) {
 
   return +date;
 }
-// console.log(getCountDaysInMonth(1, 2024));
+
 /**
  * Returns the total number of days between two dates, including both the start and end dates.
  *
@@ -119,12 +113,6 @@ function getCountDaysInMonth(month, year) {
 function getCountDaysOnPeriod(dateStart, dateEnd) {
   return (new Date(dateEnd) - new Date(dateStart)) / (60 * 60 * 24 * 1000) + 1;
 }
-// console.log(
-//   getCountDaysOnPeriod('2024-02-01T00:00:00.000Z', '2024-02-02T00:00:00.000Z')
-// );
-// console.log(
-//   getCountDaysOnPeriod('2024-02-01T00:00:00.000Z', '2024-02-12T00:00:00.000Z')
-// );
 
 /**
  * Returns true if a given date is within a specified range, including both the start and end dates.
@@ -149,12 +137,6 @@ function isDateInPeriod(date, period) {
     new Date(date) <= new Date(period.end)
   );
 }
-// console.log(
-//   isDateInPeriod('2024-02-01', { start: '2024-02-02', end: '2024-03-02' })
-// );
-// console.log(
-//   isDateInPeriod('2024-02-02', { start: '2024-02-02', end: '2024-03-02' })
-// );
 
 /**
  * Returns the date formatted in 'M/D/YYYY, hh:mm:ss a'.
@@ -176,27 +158,6 @@ function formatDate(date) {
   return `${d.getMonth() + 1}/${d.getUTCDate()}/${d.getFullYear()}, ${h}:${min}:${s} ${m}`;
 }
 
-// console.log(formatDate('2010-12-15T12:55:00.000Z'));
-// console.log(formatDate('1980-05-08T12:50:00.000Z'));
-// console.log(formatDate('1980-05-08T12:50:00.000Z'));
-// console.log(formatDate('2024-02-01T15:00:00.000Z'));
-// console.log(formatDate('2024-02-01T15:00:00.000Z'));
-
-// function JSClock(date) {
-//   const time = new Date(date);
-//   const hour = time.getHours();
-//   const minute = time.getMinutes();
-//   const second = time.getSeconds();
-//   let temp = String(hour % 12);
-//   if (temp === '0') {
-//     temp = '12';
-//   }
-//   temp += hour >= 12 ? ' P.M.' : ' A.M.';
-//   temp += (minute < 10 ? ':0' : ':') + minute;
-//   temp += (second < 10 ? ':0' : ':') + second;
-//   return temp;
-// }
-// console.log(JSClock('1980-05-08T12:50:00.000Z'));
 /**
  * Returns the total number of weekend days (Saturdays and Sundays) in a specified month and year.
  *
@@ -220,8 +181,6 @@ function getCountWeekendsInMonth(month, year) {
   }
   return weekends;
 }
-// getCountWeekendsInMonth(2, 2024);
-// console.log(getCountWeekendsInMonth(1, 2024));
 
 /**
  * Returns the week number of the year for a given date.
