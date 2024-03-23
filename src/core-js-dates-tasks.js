@@ -157,6 +157,9 @@ function formatDate(date) {
   const s = d.getSeconds() > 10 ? d.getSeconds() : `0${d.getSeconds()}`;
   return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}, ${h}:${min}:${s} ${m}`;
 }
+// function formatDate(/* date */) {
+//   throw new Error('Not implemented');
+// }
 
 /**
  * Returns the total number of weekend days (Saturdays and Sundays) in a specified month and year.
@@ -195,12 +198,15 @@ function getCountWeekendsInMonth(month, year) {
  * Date(2024, 0, 31) => 5
  * Date(2024, 1, 23) => 8
  */
+
 function getWeekNumberByDate(date) {
   const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
   const pastDaysOfYear = (date - firstDayOfYear + 86400000) / 86400000;
   return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
 }
-
+// function getWeekNumberByDate(/* date */) {
+//   throw new Error('Not implemented');
+// }
 /**
  * Returns the date of the next Friday the 13th from a given date.
  * Friday the 13th is considered an unlucky day in some cultures.
@@ -212,10 +218,18 @@ function getWeekNumberByDate(date) {
  * Date(2024, 0, 13) => Date(2024, 8, 13)
  * Date(2023, 1, 1) => Date(2023, 9, 13)
  */
-function getNextFridayThe13th(/*date */) {
-  throw new Error('Not implemented');
+function getNextFridayThe13th(date) {
+  const data = new Date(date);
+  data.setMonth(data.getMonth() + 1);
+  data.setDate(13);
+  while (data.getDay() !== 5) {
+    data.setMonth(data.getMonth() + 1);
+    data.setDate(13);
+  }
+  return data;
 }
 
+// console.log(getNextFridayThe13th(new Date(2024, 0, 13)));
 /**
  * Returns the quarter of the year for a given date.
  *
