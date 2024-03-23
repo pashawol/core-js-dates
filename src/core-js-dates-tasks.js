@@ -149,17 +149,17 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-// function formatDate(date) {
-//   const d = new Date(date);
-//   const h = d.getHours() > 12 ? d.getHours() - 12 : d.getHours();
-//   const m = d.getHours() >= 12 ? 'PM' : 'AM';
-//   const min = d.getMinutes() > 10 ? d.getMinutes() : `0${d.getMinutes()}`;
-//   const s = d.getSeconds() > 10 ? d.getSeconds() : `0${d.getSeconds()}`;
-//   return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}, ${h}:${min}:${s} ${m}`;
-// }
-function formatDate(/* date */) {
-  throw new Error('Not implemented');
+function formatDate(date) {
+  const d = new Date(date);
+  const h = d.getHours() > 12 ? d.getHours() - 12 : d.getHours();
+  const m = d.getHours() >= 12 ? 'PM' : 'AM';
+  const min = d.getMinutes() > 10 ? d.getMinutes() : `0${d.getMinutes()}`;
+  const s = d.getSeconds() > 10 ? d.getSeconds() : `0${d.getSeconds()}`;
+  return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}, ${h}:${min}:${s} ${m}`;
 }
+// function formatDate(/* date */) {
+//   throw new Error('Not implemented');
+// }
 
 /**
  * Returns the total number of weekend days (Saturdays and Sundays) in a specified month and year.
@@ -200,18 +200,17 @@ function getCountWeekendsInMonth(month, year) {
  */
 
 function getWeekNumberByDate(date) {
-  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
-  const pastDaysOfYear = Math.round(
-    (date - firstDayOfYear) / 1000 / 60 / 60 / 24
+  const currentDate = new Date(date);
+  const startMonday = new Date(currentDate);
+  startMonday.setDate(currentDate.getDate() - ((currentDate.getDay() + 6) % 7));
+  const startMondayYear = startMonday.getFullYear();
+  const firstDayOfYear = new Date(startMondayYear, 0, 1);
+  const pastDaysOfYear = Math.ceil(
+    (startMonday - firstDayOfYear) / (1000 * 60 * 60 * 24)
   );
-  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  return Math.ceil(pastDaysOfYear / 7) + 1;
 }
 
-// console.log(getWeekNumberByDate(new Date(2023, 1, 23)), 9);
-// console.log(getWeekNumberByDate(new Date(2019, 5, 23)), 25);
-// console.log(getWeekNumberByDate(new Date(2018, 6, 22)), 29);
-// console.log(getWeekNumberByDate(new Date(2017, 7, 21)), 35);
-// console.log(getWeekNumberByDate(new Date(1950, 10, 22)), 48);
 // function getWeekNumberByDate(/* date */) {
 //   throw new Error('Not implemented');
 // }
